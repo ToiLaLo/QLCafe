@@ -127,9 +127,9 @@ namespace WebApplication1
                     string Dvt = (grow.FindControl("LabDvt") as Label).Text;
                     string Gia = (grow.FindControl("LabGia") as Label).Text;
                     string SoLuong = (grow.FindControl("txtSoLuong") as TextBox).Text;
-                    
+
                     dt.Rows.Add(TenDoUong, Dvt, Gia, SoLuong);
-                   // int SL = 1;
+                    // int SL = 1;
 
                     //foreach (GridViewRow grow2 in GridView2.Rows)
                     //{
@@ -140,10 +140,14 @@ namespace WebApplication1
                     //    {
                     //        SL = Int32.Parse(SoLuong);
                     //        SL++;
-                            
+
                     //        break;
                     //    }
-                                          }
+                }
+                else
+                {
+                    Response.Write("Vui lòng chọn đồ uống");
+                }
                     //dt.Rows.Add(TenDoUong, Dvt, Gia, SL);
                     //string SoLuong = (grow.FindControl("LabSoLuong") as Label).Text;
                 //    dt.Rows.Add(TenDoUong, Dvt,Gia);
@@ -215,7 +219,7 @@ namespace WebApplication1
             }
             else
             {
-               // tt = int.Parse(txtThanhToan.Text);
+                tt = int.Parse(txtThanhToan.Text);
                 tienthoi = tt - tongcong;
                 txtTienTraLai.Text = tienthoi.ToString();
                 txtThanhToan.Text = tt.ToString();
