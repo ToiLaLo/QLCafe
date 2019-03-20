@@ -21,7 +21,8 @@
                 <td class="style1">
                     &nbsp;</td>
                 <td align="center">
-                    <asp:Label ID="Label1" runat="server" Text="Đăng Nhập Hệ Thống"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Đăng Nhập Hệ Thống" 
+                        Font-Size="Larger"></asp:Label>
                 </td>
                 <td>
                     &nbsp;</td>

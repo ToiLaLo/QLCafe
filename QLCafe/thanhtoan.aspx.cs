@@ -210,11 +210,12 @@ namespace WebApplication1
             int tienthoi;
             if (txtThanhToan.Text == "")
             {
-                Label7.Text = "Mời nhập số tiền đưa";
+               // Response.Write("Mời bạn nhập số tiền");
+                Label7.Text = "Mời bạn nhập số tiền";
             }
             else
             {
-                tt = int.Parse(txtThanhToan.Text);
+               // tt = int.Parse(txtThanhToan.Text);
                 tienthoi = tt - tongcong;
                 txtTienTraLai.Text = tienthoi.ToString();
                 txtThanhToan.Text = tt.ToString();
