@@ -14,14 +14,16 @@ namespace WebApplication1
         static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CSDL"].ConnectionString.ToString();
         float ck;
         int tt;
+
         //string connectionString = @"Server=DESKTOP-0VLE3HB;Database=QuanCafe;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+
                 LoadData();
-            }      
+
         }
+
         private void LoadData()
         {
             SqlConnection sqlConn = new SqlConnection(connectionString);
@@ -52,8 +54,8 @@ namespace WebApplication1
             da.Fill(dataTable);
             GridView1.DataSource = dataTable;
             GridView1.DataBind();
-            conn.Close();    
- 
+            conn.Close();
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -62,17 +64,18 @@ namespace WebApplication1
             {
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 lblMessage.Text = "Nhập [Tên đồ uống] cần tìm";
-                
+
             }
             else
             {
                 //lblMessage.Text = "Không có dữ liệu cần tìm";
                 LoadData(txtSearch.Text.Trim());
                 lblMessage.Text = "";
-                
+
                 if (GridView1.Rows.Count == 0)
-                    lblMessage.Text = "Không có đồ uống cần tìm...";
-              
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = "Không có đồ uống cần tìm...";
+
             }
         }
 
@@ -100,6 +103,7 @@ namespace WebApplication1
         {
             GridView1.EditIndex = -1;
             LoadData();
+
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -110,68 +114,51 @@ namespace WebApplication1
 
         protected void ButCopy_Click(object sender, EventArgs e)
         {
+
             DataTable dt = new DataTable();
             dt.Columns.Add("TenDoUong");
             dt.Columns.Add("Dvt");
             dt.Columns.Add("GiaBan");
             dt.Columns.Add("SoLuong");
-
+            int sl = 0;
             foreach (GridViewRow grow in GridView1.Rows)
             {
                 var checkboxselect = grow.FindControl("CheckBox1") as CheckBox;
-                CheckBox chk = (CheckBox)grow.FindControl("CheckBox1");
-                if (checkboxselect.Checked)
+
+                if (checkboxselect.Checked == true)
                 {
 
+                    Label7.Text = null;
                     string TenDoUong = (grow.FindControl("Labname") as Label).Text;
                     string Dvt = (grow.FindControl("LabDvt") as Label).Text;
                     string Gia = (grow.FindControl("LabGia") as Label).Text;
                     string SoLuong = (grow.FindControl("txtSoLuong") as TextBox).Text;
 
                     dt.Rows.Add(TenDoUong, Dvt, Gia, SoLuong);
-                    // int SL = 1;
+                    sl++;
 
-                    //foreach (GridViewRow grow2 in GridView2.Rows)
-                    //{
-                    //    string TenDoUong2 = (grow2.FindControl("Labname") as Label).Text;
-                    //    string SoLuong = (grow2.FindControl("LabSoLuong") as Label).Text;
+                }
 
-                    //    if (TenDoUong2 == TenDoUong)
-                    //    {
-                    //        SL = Int32.Parse(SoLuong);
-                    //        SL++;
 
-                    //        break;
-                    //    }
-                }
-                else
-                {
-                    Response.Write("Vui lòng chọn đồ uống");
-                }
-                    //dt.Rows.Add(TenDoUong, Dvt, Gia, SL);
-                    //string SoLuong = (grow.FindControl("LabSoLuong") as Label).Text;
-                //    dt.Rows.Add(TenDoUong, Dvt,Gia);
-                  //  Response.Write("aa:" + GridView1.DataKeys[grow.RowIndex].Value + ",vv:" + grow.Cells[2].Text + "<br/>");
-                    
-                    
-                    
-                    
-                }
-               
-                GridView2.DataSource = dt;
-                GridView2.DataBind();
             }
+            if (sl == 0)
+                Label7.Text = "Vui lòng chọn đồ uống";
+
+            GridView2.DataSource = dt;
+            GridView2.DataBind();
+
+        }
 
         protected void GridView2_DataBound(object sender, EventArgs e)
         {
             int tien = 0;
             int thuesuat = 0;
-            int chietsuat=0;
-            
+            int chietsuat = 0;
+
             foreach (GridViewRow grvRow in GridView2.Rows)
             {
-                tien += int.Parse(grvRow.Cells[2].Text.ToString())*int.Parse(grvRow.Cells[3].Text.ToString());
-                
+                tien += int.Parse(grvRow.Cells[2].Text.ToString()) * int.Parse(grvRow.Cells[3].Text.ToString());
+
             }
             txtTongTien.Text = tien.ToString();
             txtTongCong.Text = tien.ToString();
@@ -184,7 +171,7 @@ namespace WebApplication1
             //Test
             //Test 2
 
-            
+
         }
 
         protected void txtChietKhau_TextChanged(object sender, EventArgs e)
@@ -194,46 +181,58 @@ namespace WebApplication1
             float tongcong;
             if (float.Parse(txtChietKhau.Text) == 0)
             {
-                
+
                 txtTongCong.Text = tien.ToString();
             }
-            else{
-                ck= float.Parse(txtChietKhau.Text);
+            else
+            {
+                ck = float.Parse(txtChietKhau.Text);
                 tongcong = tien * (100 - float.Parse(txtChietKhau.Text)) / 100;
-            txtTongCong.Text = tongcong.ToString();
-            txtChietKhau.Text = ck.ToString("#.0");
+                txtTongCong.Text = tongcong.ToString();
+                txtChietKhau.Text = ck.ToString("#.0");
             }
-                
+
         }
 
-        
+
 
         protected void txtThanhToan_TextChanged(object sender, EventArgs e)
         {
             int tongcong = int.Parse(txtTongCong.Text);
             int tienthoi;
-            if (txtThanhToan.Text == "")
-            {
-               // Response.Write("Mời bạn nhập số tiền");
-                Label7.Text = "Mời bạn nhập số tiền";
-            }
-            else
+            if (txtThanhToan.Text != null)
             {
                 tt = int.Parse(txtThanhToan.Text);
                 tienthoi = tt - tongcong;
                 txtTienTraLai.Text = tienthoi.ToString();
                 txtThanhToan.Text = tt.ToString();
+                // Response.Write("Mời bạn nhập số tiền");
+                //  Label7.Text = "Mời bạn nhập số tiền";
+
             }
 
+
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            GridView2.DataSource = null;
+            GridView2.DataBind();
+            txtChietKhau.Text = null;
+            txtThanhToan.Text = null;
+            txtTongCong.Text = null;
+            txtThueSuat.Text = null;
+            txtTongTien.Text = null;
+            txtTienTraLai.Text = null;
         }
 
-       
 
-       
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
 
-       
-
-        
+            this.LoadData();
+        }
+    }
                 
     }

@@ -56,7 +56,10 @@
     </Content>
     <Content Include="Login.aspx" />
     <Content Include="thanhtoan.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="ThemDoUong.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -79,6 +82,13 @@
     </Compile>
     <Compile Include="thanhtoan.aspx.designer.cs">
       <DependentUpon>thanhtoan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ThemDoUong.aspx.cs">
+      <DependentUpon>ThemDoUong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ThemDoUong.aspx.designer.cs">
+      <DependentUpon>ThemDoUong.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

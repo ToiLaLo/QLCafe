@@ -10,6 +10,10 @@
         {
             width: 549px;
         }
+        .style3
+        {
+            width: 589px;
+        }
     </style>
     <script type="text/javascript">
         function InPhieu() {
@@ -32,10 +36,12 @@
                     <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Search" />
                     <br />
                     <asp:Label ID="lblMessage" runat="server" Text="Thông báo"></asp:Label>
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                        AllowPaging="True" 
+                        PageSize="5" onpageindexchanging="GridView1_PageIndexChanging"  >
                         
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField  HeaderText="">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="CheckBox1" runat="server" />
                                 </ItemTemplate>
@@ -76,6 +82,9 @@
                     <br />
                     <asp:Button ID="ButCopy" runat="server" Text="Tinh" onclick="ButCopy_Click" />
                     
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Label ID="Label7" runat="server"></asp:Label>
+                    
                     <br />
                     <br />
                     <br />
@@ -99,7 +108,7 @@
                     <br />
                     <br />
                 </td>
-                <td style="margin-left: 80px">
+                <td style="margin-left: 80px" class="style3">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <br />
                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -109,7 +118,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="In Phiếu" 
                         onclientclick="return InPhieu();"/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="Button3" runat="server" Text="Hủy" />
+                    <asp:Button ID="Button3" runat="server" Text="Hủy" onclick="Button3_Click" />
                     <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <br />
@@ -152,8 +161,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:TextBox ID="txtThanhToan" runat="server" AutoPostBack="True" 
                         ontextchanged="txtThanhToan_TextChanged"></asp:TextBox>
-                    &nbsp;&nbsp;
-                    <asp:Label ID="Label7" runat="server"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <br />
                     <br />
